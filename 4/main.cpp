@@ -40,6 +40,11 @@ bool is_fully_overlapping(const SectionRange& rangeA, const SectionRange& rangeB
     return rangeA.start >= rangeB.start && rangeA.end <= rangeB.end;
 }
 
+bool is_overlapping(const SectionRange& rangeA, const SectionRange& rangeB)
+{
+    return (rangeA.start - rangeB.end) * (rangeB.start - rangeA.end) >= 0;
+}
+
 int main()
 {
     std::ifstream file("input.txt");
@@ -49,7 +54,7 @@ int main()
     while (getline(file, line))
     {
         auto pair = get_pair(line);
-        bool overlaps = is_fully_overlapping(pair.first,pair.second) || is_fully_overlapping(pair.second, pair.first);
+        bool overlaps = is_overlapping(pair.first,pair.second) || is_overlapping(pair.second, pair.first);
 
         printf("%d-%d,%d-%d %d\n",
                pair.first.start,
