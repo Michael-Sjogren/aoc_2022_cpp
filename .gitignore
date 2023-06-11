@@ -34,3 +34,6 @@ input.txt
 *.out
 *.app
 main
+
+# ide
+.vscode
